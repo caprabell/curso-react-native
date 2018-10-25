@@ -1,2 +1,2 @@
 # curso-react-native
-Creating an fully operational app with react-native
+Creating a fully operational app with react-native
