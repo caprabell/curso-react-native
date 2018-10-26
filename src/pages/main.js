@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 
 export default class Main extends Component {
     static navigationOptions = {
-        title: 'JSHunt'
+        title: 'JSHunt',
     };
 
     render() {
