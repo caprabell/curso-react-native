@@ -70,13 +70,13 @@ export default class Main extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ccffcc"
+    backgroundColor: "#949DA6"
   },
   list: {
     padding: 10,
   },
   productContainer: {
-    backgroundColor: "#a6ff4d",
+    backgroundColor: "#F2F2F2",
     borderWidth: 1,
     borderRadius: 5,
     padding: 20,
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 5,
     borderWidth: 2,
-    borderColor: "#00ff00",
+    borderColor: "#403D39",
     backgroundColor: "transparent",
     justifyContent: "center",
     alignItems: "center",
@@ -107,6 +107,6 @@ const styles = StyleSheet.create({
   textButton: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: "#00ff00"
+    color: "#403D39"
   },
 });
