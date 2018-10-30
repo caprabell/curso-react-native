@@ -1,11 +1,9 @@
 import axios from 'axios';
 import env from '../environments/env';
 
-const getAll = async () => {
-  const response = await axios.get(`${env.API_URL}/products`);
+const getAll = async (page = 1) => {
+  const response = await axios.get(`${env.API_URL}/products?page=${page}`);
   return response;
 };
 
-export {
-  getAll,
-};
+export default getAll;

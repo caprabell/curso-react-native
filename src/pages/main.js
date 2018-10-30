@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
-import { getAll } from '../services/products';
+import getAll from '../services/products';
 
 export default class Main extends Component {
   static navigationOptions = {
@@ -8,25 +8,44 @@ export default class Main extends Component {
   };
 
   state = {
+    productInfo: {},
     docs: [],
+    page: 1
   };
 
   componentDidMount() {
     this.loadProducts();
   }
 
-  loadProducts = async () => {
-    const response = await getAll();
-    const { docs } = response.data;
-    this.setState({ docs });
+  loadProducts = async (page = 1) => {
+    const response = await getAll(page);
+    const { docs, ...productInfo } = response.data;
+    this.setState({
+      docs: [...this.state.docs, ...docs],
+      productInfo,
+      page
+    });
   };
+
+  loadMore = () => {
+    const { page, productInfo } = this.state;
+    if (page === productInfo.pages) return;
+    const pageNumber = page + 1;
+    this.loadProducts(pageNumber);
+  }
 
   renderItem = ({ item }) => (
     <View style={styles.container}>
       <View style={styles.productContainer}>
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.description}>{item.description}</Text>
-        <TouchableOpacity style={styles.button} onPress={() => { }}>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            this.props.navigation.navigate("Product", { product: item });
+          }}
+        >
           <Text style={styles.textButton}> Acessar </Text>
         </TouchableOpacity>
       </View>
@@ -40,6 +59,8 @@ export default class Main extends Component {
           data={this.state.docs}
           keyExtractor={item => item._id}
           renderItem={this.renderItem}
+          onEndReached={this.loadMore}
+          onEndReachedThreshold={0.1}
         />
       </View>
     );
